@@ -1,0 +1,42 @@
+ionic plugin remove cordova-plugin-file
+ionic plugin remove me.rahul.plugins.sqlDB
+
+ionic plugin remove  cordova-plugin-image-picker
+
+cordova-plugin-dbcopy
+
+
+ionic plugin add cordova-plugin-dbcopy
+
+ionic plugin add ionic-filter-bar 
+
+
+        // The function for show/hide loading progress.
+        $timeout(function () {
+            if ($scope.isAndroid) {
+                jQuery('#contract-list-loading-progress').show();
+            }
+            else {
+                jQuery('#contract-list-loading-progress').fadeIn(700);
+            }
+        }, 400);
+        $timeout(function () {
+
+            //Get all contracts.
+            $scope.getContractList();
+
+            jQuery('#contract-list-loading-progress').hide();
+            jQuery('#contract-list-content').fadeIn();
+            $scope.isLoading = false;
+        }, 3000);// End loading progress.
+		
+		
+		
+INSERT INTO contracts (contacto, categoria,telephone, email,note )
+   SELECT field1, field2, field5, field4, field6
+   FROM 'export-comercios'
+
+INSERT INTO contracts (contacto, categoria,telephone, email,note )
+   SELECT field1, field2, field5, field4, field6
+   FROM 'export-profesionales'   
+		

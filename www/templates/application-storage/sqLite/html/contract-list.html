@@ -1,0 +1,102 @@
+<!--View Information-->
+<!--View name : Contract List-->
+<!--Controller name : contractListCtrl-->
+<!--Controller path : www/templates/application-storage/sqLite/js/controllers.js-->
+<!--State name : app.contractlist-->
+<!--URL : #app/contractlist-->
+
+<ion-view view-title="">
+    <!--right button on navigation bar-->
+    <ion-nav-buttons side="right">
+        <md-button ng-disabled="isLoading" class="md-icon-button ion-nav-button-right" ng-click="navigateTo('app.contractsetting')"
+                   aria-label="Setting">
+            <i class="ion-android-more-vertical"></i>
+        </md-button>
+    </ion-nav-buttons> <!--end right button on navigation bar-->
+
+    <!--toolbar section-->
+    <md-toolbar class="bar-subheader md-tall md-primary toolbar-medium">
+        <div>
+            <h1>Teléfonos Utiles</h1>
+
+            <h2>Agregar Contacto</h2>
+        </div>
+        <a class="md-button md-accent md-fab fab-toolbar-medium"
+           ng-click="navigateTo('app.contractdetail',contract)"
+           aria-label="Add">
+            <i class="icon ion-plus"></i>
+        </a>
+    </md-toolbar><!--end toolbar section-->
+
+    <!--contract list section-->
+    <ion-content id="contract-list-content" class="fade-in">
+        <!--list section-->
+        <md-list>
+
+            <md-list-item>
+                <md-input-container md-no-float="" class="md-list-item-full-width">
+                    <input ng-model="filterText" placeholder="Buscar contactos." type="text" autocomplete="off" name="filtername"  ng-model-options="{ debounce: 1000 }" >
+					 
+                </md-input-container>
+            </md-list-item>
+
+            <!--Below code it will disable animation to better performance-->
+            <div ng-if="filterText.length>2" class="row contract-list-item"
+                 ng-repeat="contract in contracts  | filter: filterText" >
+                <div class="col-25 icon-user">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="col-50">
+                    {{ contract.contacto }} {{ contract.categoria }}
+                </div>
+                <div class="col-25 status-button">
+                    <md-menu md-position-mode="target-right target" class="md-list-item-md-menu-right">
+                        <p ng-click="$mdOpenMenu()">
+                            <md-icon md-menu-origin md-svg-icon="more"></md-icon>
+                        </p>
+                        <md-menu-content width="1">
+                            <md-menu-item>
+                                <a class="md-button md-default-theme" ng-click="navigateTo('app.contractdetail',contract)">
+                                    <span class="menu-item-button">Editar</span>
+                                </a>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <a class="md-button md-default-theme" ng-click="callTo(contract.telephone)">
+                                    <span class="menu-item-button" >Llamar {{contract.telephone}}</span>
+                                </a>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </div>
+
+            <!--Below code it will show animation when selecting row.-->
+            <md-list-item ng-if="isAnimated" class="md-list-item-default"
+                          ng-click="navigateTo('app.contractdetail',contract)"
+                          ng-repeat="contract in contracts  | filter: filterText | orderBy: 'contacto'">
+
+                <i class="fa fa-user"></i>
+
+                <p>{{ contract.contacto }} {{ contract.categoria }}</p>
+                <md-switch class="md-secondary"
+                           
+                           ng-change="updateContract(contract)">
+                </md-switch>
+            </md-list-item>
+
+        </md-list>
+        <!--end list section-->
+        
+        <div ng-if="contracts === undefined" class="no-results">
+            <p style="padding: 10px">No se encontraron resultados</p>
+        </div>		
+    </ion-content><!--end contract list section-->
+	
+
+    <!--loading progress
+    <div id="contract-list-loading-progress" class="loading-progress fade-in">
+        <ion-spinner ng-if="!isAndroid" class="progress-circular"></ion-spinner>
+        <md-progress-circular ng-if="isAndroid" md-mode="indeterminate"></md-progress-circular>
+    </div>end loading progress-->
+
+</ion-view>

@@ -1,0 +1,27 @@
+<!--View Information-->
+<!--View name : Buscar-->
+<!--Controller name : wordpressLoginCtrl-->
+<!--Controller path : www/templates/buscar/js/controllers.js-->
+<!--State name : app.buscar-->
+<!--URL : #app/buscar-->
+
+<ion-view title="">
+    <!--login content section-->
+    <ion-content>
+        <form >
+
+		<label class="item item-input">
+		  <i class="icon ion-search placeholder-icon"></i>
+		  <input type="search" id="busqueda"  ng-model="busqueda" required  placeholder="Escribir tu búsqueda">
+		</label>
+
+
+		
+<button class="button button-full  button-balanced" ng-click="openBuscar(busqueda)">
+<!--<button class="button button-full  button-balanced" ng-click="navigateTo('app.comercioList')">-->
+
+Buscar
+</button>
+        </form>
+    </ion-content><!--end login content section-->
+</ion-view>
